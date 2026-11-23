@@ -1,0 +1,98 @@
+
+<div class="calendar-widget">
+
+  <!-- Calendar Header -->
+ <div class="calendar-header">
+
+  <button (click)="previousMonth()">❮</button>
+
+  <h2>{{ monthName }} {{ year }}</h2>
+
+  <div class="calendar-actions">
+
+    <button class="today-btn" (click)="goToToday()">
+      Today
+    </button>
+
+    <button (click)="nextMonth()">❯</button>
+
+  </div>
+
+</div>
+
+  <div class="calendar-grid">
+
+    <!-- Weekday headings -->
+    @for (
+      weekday of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      track weekday
+    ) {
+      <div class="weekday">
+        {{ weekday }}
+      </div>
+    }
+
+    <!-- Calendar dates -->
+    @for (date of calendarDays(); track $index) {
+
+      @if (date === null) {
+
+        <div class="empty-day"></div>
+
+      } @else {
+
+        <div
+          class="calendar-day"
+          [class.today]="isToday(date)"
+          [class.has-tasks]="hasTasks(date)"
+          [class.selected]="isSelectedDate(date)"
+          (click)="selectDate(date)">
+
+          {{ date }}
+
+          @if (hasTasks(date)) {
+            <span class="task-dot"></span>
+          }
+
+        </div>
+
+      }
+
+    }
+
+  </div>
+
+  <!-- Selected Tasks -->
+  <div class="selected-tasks">
+
+    <h3>
+      Tasks for {{ selectedDate() || 'Select a date' }}
+    </h3>
+
+    @for (task of selectedTasks(); track task.id) {
+
+      <div class="task-item">
+
+        <h4>{{ task.title }}</h4>
+
+        <p>{{ task.description }}</p>
+
+        <span>{{ task.priority }}</span>
+
+        <p>
+          {{ task.completed ? 'Completed' : 'Pending' }}
+        </p>
+
+      </div>
+
+    } @empty {
+
+      <p class="no-tasks">
+        No tasks scheduled for this date.
+      </p>
+
+    }
+
+  </div>
+
+</div>

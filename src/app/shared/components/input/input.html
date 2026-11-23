@@ -1,0 +1,23 @@
+<label>{{ label }}</label>
+<input
+  [type]="type"
+  [placeholder]="placeholder"
+  [ngModel]="value"
+  (ngModelChange)="valueChange.emit($event)"
+  [required]="required"
+  [email]="type === 'email'"
+  [minlength]="type === 'password' ? 6 : null"
+  (blur)="touched = true; touchedChange.emit(true)"
+/>
+
+@if (touched) {
+  @if (required && !value) {
+    <p class="error-text">
+      {{ errorMessage || 'This field is required' }}
+    </p>
+  } @else if (type === 'email' && !isValidEmail) {
+    <p class="error-text">Please enter a valid email.</p>
+  } @else if (type === 'password' && value.length < 6) {
+    <p class="error-text">Password must contain at least 6 characters.</p>
+  }
+}

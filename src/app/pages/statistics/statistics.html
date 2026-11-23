@@ -1,0 +1,237 @@
+
+<div class="statistics-page">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div>
+      <h1>Statistics</h1>
+      <p>Analyze your productivity and task performance.</p>
+    </div>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="stats-cards">
+
+    <div class="stats-card">
+      <div class="card-icon blue">📋</div>
+      <p>Total Tasks</p>
+      <h2>{{ taskService.totalTasks() }}</h2>
+    </div>
+
+    <div class="stats-card">
+      <div class="card-icon green">✓</div>
+      <p>Completed Tasks</p>
+      <h2>{{ completedCount() }}</h2>
+    </div>
+
+    <div class="stats-card">
+      <div class="card-icon orange">⏳</div>
+      <p>Pending Tasks</p>
+      <h2>{{ pendingCount() }}</h2>
+    </div>
+
+    <div class="stats-card">
+      <div class="card-icon purple">📈</div>
+      <p>Completion Rate</p>
+      <h2>{{ completionPercentage() }}%</h2>
+    </div>
+
+  </div>
+
+  <!-- Weekly Productivity -->
+  <div class="statistics-section">
+
+    <div class="section-header">
+      <div>
+        <h2>Weekly Productivity</h2>
+        <p>Tasks completed during the last 7 days.</p>
+      </div>
+    </div>
+
+    <div class="weekly-chart">
+
+      @for (day of weeklyStats(); track day.label) {
+
+        <div class="chart-column">
+
+          <span class="bar-count">
+            {{ day.count }}
+          </span>
+
+          <div class="bar-container">
+            <div
+              class="bar weekly-bar"
+              [style.height.%]="
+                (day.count / maxWeeklyCount()) * 100
+              ">
+            </div>
+          </div>
+
+          <span class="chart-label">
+            {{ day.label }}
+          </span>
+
+          <span class="chart-date">
+            {{ day.date }}
+          </span>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+  <!-- Monthly Productivity -->
+  <div class="statistics-section">
+
+    <h2>Monthly Productivity</h2>
+    <p>Completed tasks during the last 6 months.</p>
+
+    <div class="monthly-chart">
+
+      @for (month of monthlyStats(); track month.label) {
+
+        <div class="monthly-item">
+
+          <div class="monthly-info">
+            <span>{{ month.label }}</span>
+            <strong>{{ month.count }} tasks</strong>
+          </div>
+
+          <div class="progress-background">
+            <div
+              class="progress-fill"
+              [style.width.%]="
+                (month.count / maxMonthlyCount()) * 100
+              ">
+            </div>
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+  <!-- Priority Distribution -->
+  <div class="statistics-section">
+
+    <h2>Priority Distribution</h2>
+    <p>How your tasks are distributed by priority.</p>
+
+    <div class="priority-list">
+
+      <div class="priority-item">
+
+        <div class="priority-info">
+          <span class="priority-dot low-dot"></span>
+          <span>Low Priority</span>
+          <strong>{{ lowPriorityTasks() }}</strong>
+        </div>
+
+        <div class="progress-background">
+          <div
+            class="progress-fill low-fill"
+            [style.width.%]="
+              taskService.totalTasks() === 0
+                ? 0
+                : (lowPriorityTasks() / taskService.totalTasks()) * 100
+            ">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="priority-item">
+
+        <div class="priority-info">
+          <span class="priority-dot medium-dot"></span>
+          <span>Medium Priority</span>
+          <strong>{{ mediumPriorityTasks() }}</strong>
+        </div>
+
+        <div class="progress-background">
+          <div
+            class="progress-fill medium-fill"
+            [style.width.%]="
+              taskService.totalTasks() === 0
+                ? 0
+                : (mediumPriorityTasks() / taskService.totalTasks()) * 100
+            ">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="priority-item">
+
+        <div class="priority-info">
+          <span class="priority-dot high-dot"></span>
+          <span>High Priority</span>
+          <strong>{{ highPriorityTasks() }}</strong>
+        </div>
+
+        <div class="progress-background">
+          <div
+            class="progress-fill high-fill"
+            [style.width.%]="
+              taskService.totalTasks() === 0
+                ? 0
+                : (highPriorityTasks() / taskService.totalTasks()) * 100
+            ">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Productivity Insights -->
+  <div class="statistics-section insights-section">
+
+    <h2>Productivity Insights</h2>
+
+    <div class="insight-grid">
+
+      <div class="insight-card">
+        <span>🏆</span>
+        <div>
+          <p>Most Productive Day</p>
+          <h3>
+            {{ mostProductiveDay().label }}
+          </h3>
+          <small>
+            {{ mostProductiveDay().count }} tasks completed
+          </small>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <span>🎯</span>
+        <div>
+          <p>Completion Rate</p>
+          <h3>{{ completionPercentage() }}%</h3>
+          <small>Overall task completion</small>
+        </div>
+      </div>
+
+      <div class="insight-card">
+        <span>🕒</span>
+        <div>
+          <p>Recorded Completions</p>
+          <h3>{{ recordedCompletions() }}</h3>
+          <small>Tasks with completion timestamps</small>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

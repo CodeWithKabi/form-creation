@@ -1,0 +1,140 @@
+<div class="dashboard">
+  <!-- Page heading -->
+  <div class="dashboard-header">
+    <div>
+      <h1>Dashboard Overview</h1>
+      <p>Welcome back, {{ settingsService.settings().name }}!</p>
+    </div>
+
+    <a routerLink="/dashboard/add-task" class="primary-btn"> + Add New Task </a>
+  </div>
+
+  <!-- Summary cards -->
+  <div class="summary-grid">
+    <div class="summary-card total">
+      <div class="card-top">
+        <span>Total Tasks</span>
+        <span class="card-icon">📋</span>
+      </div>
+      <h2>{{ totalTasks() }}</h2>
+      <p>All your tasks</p>
+    </div>
+
+    <div class="summary-card completed">
+      <div class="card-top">
+        <span>Completed Tasks</span>
+        <span class="card-icon">✅</span>
+      </div>
+      <h2>{{ completedTasks() }}</h2>
+      <p>Successfully finished</p>
+    </div>
+
+    <div class="summary-card pending">
+      <div class="card-top">
+        <span>Pending Tasks</span>
+        <span class="card-icon">⏳</span>
+      </div>
+      <h2>{{ pendingTasks() }}</h2>
+      <p>Tasks waiting for you</p>
+    </div>
+  </div>
+
+  <!-- Overall progress -->
+  <div class="progress-card">
+    <div class="section-heading">
+      <div>
+        <h2>Overall Progress</h2>
+        <p>Track your task completion</p>
+      </div>
+
+      <span class="percentage">{{ progressPercentage() }}%</span>
+    </div>
+
+    <div class="progress-track">
+      <div class="progress-fill" [style.width.%]="progressPercentage()"></div>
+    </div>
+
+    <div class="progress-footer">
+      <span>{{ completedTasks() }} completed</span>
+      <span>{{ pendingTasks() }} remaining</span>
+    </div>
+  </div>
+
+  <!-- Recent tasks -->
+  <div class="recent-section">
+    <div class="section-heading">
+      <div>
+        <h2>Recent Tasks</h2>
+        <p>Your latest task activity</p>
+      </div>
+
+      <a routerLink="/dashboard/my-tasks" class="view-all"> View All → </a>
+    </div>
+
+    @for (task of recentTasks(); track task.id) {
+      <div class="recent-task">
+        <div class="task-info">
+          <span class="task-status-dot" [class.done]="task.completed"> </span>
+
+          <div>
+            <h3>{{ task.title }}</h3>
+            <p>Due date: {{ task.dueDate || 'Not set' }}</p>
+          </div>
+        </div>
+
+        <div class="task-labels">
+          <span
+            class="priority"
+            [class.high]="task.priority === 'High'"
+            [class.medium]="task.priority === 'Medium'"
+            [class.low]="task.priority === 'Low'"
+          >
+            {{ task.priority }}
+          </span>
+
+          <span class="status" [class.done]="task.completed">
+            {{ task.completed ? 'Completed' : 'Pending' }}
+          </span>
+        </div>
+      </div>
+    } @empty {
+      <div class="empty-state">
+        <span>📝</span>
+        <h3>No tasks yet</h3>
+        <p>Create your first task to get started.</p>
+        <a routerLink="/dashboard/add-task" class="primary-btn"> Create Task </a>
+      </div>
+    }
+  </div>
+
+  <!-- Quick actions -->
+  <div class="quick-actions">
+    <h2>Quick Actions</h2>
+
+    <div class="action-grid">
+      <a routerLink="/dashboard/add-task" class="action-card">
+        <span>➕</span>
+        <div>
+          <h3>Add a Task</h3>
+          <p>Create a new task</p>
+        </div>
+      </a>
+
+      <a routerLink="/dashboard/my-tasks" class="action-card">
+        <span>📋</span>
+        <div>
+          <h3>My Tasks</h3>
+          <p>Manage your tasks</p>
+        </div>
+      </a>
+
+      <a routerLink="/dashboard/statistics" class="action-card">
+        <span>📊</span>
+        <div>
+          <h3>Statistics</h3>
+          <p>View your productivity</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

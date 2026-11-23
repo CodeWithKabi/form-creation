@@ -1,0 +1,69 @@
+
+<div class="history-page">
+
+  <!-- Page Header -->
+  <div class="history-header">
+    <div>
+      <h1>Task History</h1>
+      <p>Review all your completed tasks.</p>
+    </div>
+
+    <div class="history-count">
+      {{ totalCompleted() }} Completed
+    </div>
+  </div>
+
+  <!-- Completed Tasks -->
+  <div class="history-list">
+
+    @for (task of completedTasks(); track task.id) {
+
+      <div class="history-card">
+
+        <div class="history-card-header">
+
+          <h3>{{ task.title }}</h3>
+
+          <span class="completed-badge">
+            ✓ Completed
+          </span>
+
+        </div>
+
+        <p class="task-description">
+          {{ task.description }}
+        </p>
+
+        <div class="history-details">
+
+          <span>
+            Priority: {{ task.priority }}
+          </span>
+
+          <span>
+            Due date: {{ task.dueDate }}
+          </span>
+
+          <span>
+            Completed:
+            {{ task.completedAt
+              ? (task.completedAt | date:'medium')
+              : 'Date unavailable' }}
+          </span>
+
+        </div>
+
+      </div>
+
+    } @empty {
+
+      <div class="empty-history">
+        <h3>No completed tasks yet</h3>
+        <p>Tasks you complete will appear here.</p>
+      </div>
+
+    }
+
+  </div>
+
+</div>

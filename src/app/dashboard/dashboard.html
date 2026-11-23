@@ -1,0 +1,25 @@
+<div class="dashboard-container">
+  <div class="dashboard-card">
+
+    <div class="dashboard-header">
+      <h1>Welcome to Dashboard!</h1>
+      <p>Manage your account from here.</p>
+    </div>
+
+    <div class="user-info">
+      <span class="user-icon">👤</span>
+      <div>
+        <p class="label">Logged in as</p>
+        <h2>{{ name }}</h2>
+      </div>
+    </div>
+
+    <div class="dashboard-actions">
+      <app-button
+        text="LogOut"
+        (buttonClick)="logout()">
+      </app-button>
+    </div>
+
+  </div>
+</div>

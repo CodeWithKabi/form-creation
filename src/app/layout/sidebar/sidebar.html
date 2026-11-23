@@ -1,0 +1,25 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+<div class="user-profile">
+  <span>👤</span>
+  <span>{{ settingsService.settings().name }}</span>
+</div>  </div>
+
+  <nav class="sidebar-menu">
+    @for (item of menuItems; track item.path) {
+      <a
+        [routerLink]="item.path"
+        routerLinkActive="active">
+
+        <span class="menu-icon">{{ item.icon }}</span>
+        <span>{{ item.label }}</span>
+
+      </a>
+    }
+  </nav>
+
+<button class="logout-btn" (click)="logout()">
+  <span>🚪</span>
+  <span>Logout</span>
+</button>
+</div>

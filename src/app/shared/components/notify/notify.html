@@ -1,0 +1,29 @@
+
+<div class="notification-container">
+
+  @for (
+    notification of notificationService.notifications();
+    track notification.id
+  ) {
+
+    <div
+      class="notification"
+      [class.success]="notification.type === 'success'"
+      [class.error]="notification.type === 'error'"
+      [class.warning]="notification.type === 'warning'"
+      [class.info]="notification.type === 'info'"
+    >
+
+      <span>{{ notification.message }}</span>
+
+      <button
+        (click)="notificationService.remove(notification.id)"
+      >
+        ×
+      </button>
+
+    </div>
+
+  }
+
+</div>

@@ -1,0 +1,85 @@
+<div class="register-page">
+  <div class="register-card">
+    <div class="register-header">
+      <h1>Create Account</h1>
+      <p>Register to get started</p>
+    </div>
+
+    <form #registerForm="ngForm" (ngSubmit)="register()">
+      <div class="form-group">
+        <app-input
+          label="FullName"
+          type="text"
+          [(value)]="name"
+          placeholder="Enter your full name"
+          [required]="true"
+          errorMessage="Name is required"
+        />
+      </div>
+
+      <div class="form-group">
+        <app-input
+          label="Email"
+          placeholder="Enter Your 2nd Email"
+          type="email"
+          [(value)]="email"
+          errorMessage="Email is required"
+          [required]="true"
+        />
+      </div>
+
+      <div class="form-group">
+        <app-input
+          label="Password"
+          type="password"
+          [(value)]="password"
+          placeholder="Enter your password"
+          [required]="true"
+          errorMessage="Password is required"
+        />
+
+        <!-- @if (passwordField.invalid && passwordField.touched) {
+          <p class="error-text">Password must contain at least 6 characters.</p>
+        } -->
+      </div>
+
+      <div class="form-group">
+        <!-- <label>Confirm Password</label> -->
+        <app-input
+          label="Confirm Password"
+          type="password"
+          [(value)]="confirmPassword"
+          placeholder="Confirm your password"
+          [required]="true"
+          errorMessage="Please confirm your password"
+        />
+
+        <!-- @if (password !== confirmPassword && confirmPasswordField.touched) {
+          <p class="error-text">Passwords do not match!</p>
+        } -->
+      </div>
+
+      <!-- <button
+        type="submit"
+        class="register-btn"
+        [disabled]="registerForm.invalid || password !== confirmPassword"
+      >
+        Register
+      </button> -->
+      <app-button
+        text="Register"
+        (buttonClick)="register()"
+        [disabled]="!email || !password || !isValidEmail"
+      ></app-button>
+
+      @if (successMessage) {
+        <p class="success-text">{{ successMessage }}</p>
+      }
+
+      <p class="login-text">
+        Already have an account?
+        <a routerLink="/login">Login</a>
+      </p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,179 @@
+
+.calendar-widget {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid #e2e8f0;
+
+  // Header
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+
+    h2 {
+      color: #1e293b;
+      font-size: 25px;
+      margin: 0;
+    }
+
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        background: #1d4ed8;
+      }
+    }
+  }
+  .calendar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .today-btn {
+    background: #e2e8f0;
+    color: #1e293b;
+
+    &:hover {
+      background: #cbd5e1;
+    }
+  }
+}
+
+  // Calendar grid
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+  }
+
+  // Weekday headings
+  .weekday {
+    text-align: center;
+    padding: 12px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  // Empty spaces
+  .empty-day {
+    min-height: 65px;
+  }
+
+  // Calendar dates
+  .calendar-day {
+    min-height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+
+    color: #1e293b;
+    font-weight: 600;
+
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+      background: #dbeafe;
+    }
+
+    // Selected date
+    &.selected {
+      background: #dbeafe;
+      border: 2px solid #2563eb;
+    }
+
+    // Date containing tasks
+    &.has-tasks {
+      border: 2px solid #2563eb;
+    }
+
+    // Today's date
+    &.today {
+      background: #2563eb;
+      color: white;
+      border: 2px solid #1d4ed8;
+      font-weight: 700;
+    }
+
+    // Task indicator
+    .task-dot {
+      width: 7px;
+      height: 7px;
+      background: #22c55e;
+      border-radius: 50%;
+
+      position: absolute;
+      bottom: 8px;
+    }
+  }
+
+  // Selected tasks section
+  .selected-tasks {
+    margin-top: 30px;
+
+    h3 {
+      color: #1e293b;
+      margin-bottom: 15px;
+    }
+
+    .task-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 12px;
+
+      h4 {
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+
+      p {
+        color: #64748b;
+        margin-bottom: 6px;
+      }
+
+      span {
+        color: #2563eb;
+      }
+    }
+
+    .no-tasks {
+      color: #64748b;
+      padding: 15px 0;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .calendar-widget {
+    padding: 12px;
+
+    .calendar-grid {
+      gap: 5px;
+    }
+
+    .calendar-day,
+    .empty-day {
+      min-height: 45px;
+    }
+
+    .weekday {
+      padding: 8px 2px;
+      font-size: 12px;
+    }
+  }
+}

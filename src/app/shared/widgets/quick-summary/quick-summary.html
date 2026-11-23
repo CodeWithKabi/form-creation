@@ -1,0 +1,15 @@
+<div class="quick-summary">
+
+  <h2>Quick Summary</h2>
+
+  <p>Completed Tasks: {{ completedCount }}</p>
+
+  <p>Pending Tasks: {{ pendingCount }}</p>
+
+  @if (completedCount > 0) {
+    <p>{{ message }}</p>
+  } @else {
+    <p>No tasks completed yet. Start your first task!</p>
+  }
+
+</div>

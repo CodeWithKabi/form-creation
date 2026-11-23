@@ -1,0 +1,53 @@
+<div
+  class="my-tasks"
+  [class.compact-mode]="settingsService.settings().compactMode">  <div class="page-header">
+    <div>
+      <h1>My Tasks</h1>
+      <p>Manage and track all your tasks in one place.</p>
+    </div>
+
+    <span class="task-count"> {{ taskService.tasks().length }} Tasks </span>
+  </div>
+
+  <div class="task-list">
+    @for (task of taskService.tasks(); track task.id) {
+      <div class="task-card">
+        <div class="task-content">
+          <div class="task-title-row">
+            <h2>{{ task.title }}</h2>
+
+            <span
+              class="priority"
+              [class.high]="task.priority === 'High'"
+              [class.medium]="task.priority === 'Medium'"
+              [class.low]="task.priority === 'Low'"
+            >
+              {{ task.priority }}
+            </span>
+          </div>
+
+          <p class="description">{{ task.description }}</p>
+
+          <div class="task-meta">
+            <span>📅 Due: {{ task.dueDate }}</span>
+
+            <span class="status" [class.completed]="task.completed">
+              {{ task.completed ? 'Completed' : 'Pending' }}
+            </span>
+          </div>
+        </div>
+  <button
+  class="status-toggle-btn"
+  [class.completed]="task.completed"
+  (click)="toggleTask(task)">
+  {{ task.completed ? 'Mark as Pending' : 'Mark as Completed' }}
+</button>
+      </div>
+    } @empty {
+      <div class="empty-state">
+        <h2>No tasks yet</h2>
+        <p>Create your first task to get started!</p>
+      </div>
+    }
+  </div>
+</div>

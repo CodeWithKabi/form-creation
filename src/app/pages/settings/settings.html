@@ -1,0 +1,107 @@
+
+<div class="settings-page" >
+  <!-- <div class="page-header">
+    <div>
+   
+      <p>Customize your Task Manager experience.</p>
+    </div>
+  </div> -->
+
+
+  <!-- Profile Settings -->
+  <section class="settings-card">
+    <div class="card-heading">
+      <div class="heading-icon profile-icon">👤</div>
+      <div>
+        <h2>Profile Settings</h2>
+        <p>Manage your personal information.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input
+        id="name"
+        type="text"
+        [(ngModel)]="settings.name"
+        placeholder="Enter your name">
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="settings.email"
+        placeholder="Enter your email">
+    </div>
+  </section>
+
+  <!-- Task Preferences -->
+  <section class="settings-card">
+    <div class="card-heading">
+      <div class="heading-icon task-icon">📋</div>
+      <div>
+        <h2>Task Preferences</h2>
+        <p>Choose your default task settings.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="priority">Default Task Priority</label>
+
+      <select
+        id="priority"
+        [(ngModel)]="settings.defaultPriority">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </div>
+
+    <div class="setting-option">
+      <div>
+        <h3>Compact Task View</h3>
+        <p>Use less spacing when displaying tasks.</p>
+      </div>
+
+      <input
+        type="checkbox"
+        [(ngModel)]="settings.compactMode">
+    </div>
+  </section>
+
+  <!-- Appearance Settings -->
+  <section class="settings-card">
+    <div class="card-heading">
+      <div class="heading-icon appearance-icon">🎨</div>
+      <div>
+        <h2>Appearance</h2>
+        <p>Choose your preferred settings page theme.</p>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="theme">Theme</label>
+
+      <select
+        id="theme"
+        [(ngModel)]="settings.theme">
+        <option value="light">Light Mode</option>
+        <option value="dark">Dark Mode</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Action Buttons -->
+  <div class="settings-actions">
+    <button class="reset-btn" (click)="resetSettings()">
+      Reset to Default
+    </button>
+
+    <button class="save-btn" (click)="saveSettings()">
+      Save Changes
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,48 @@
+<div class="completed-page">
+
+  <div class="page-header">
+    <div>
+      <h1>Completed Tasks</h1>
+      <p>Great work! Here are the tasks you have finished.</p>
+    </div>
+
+    <span class="task-count">
+      {{ completedTasks.length }} Tasks
+    </span>
+  </div>
+
+  <div class="task-grid">
+
+    @for (task of completedTasks; track task.id) {
+
+      <div class="task-card">
+
+        <div class="task-top">
+          <h3>{{ task.title }}</h3>
+          <span class="priority">{{ task.priority }}</span>
+        </div>
+
+        <p class="description">{{ task.description }}</p>
+
+        <div class="task-bottom">
+          <span>📅 Due: {{ task.dueDate }}</span>
+          <span class="completed-badge">Completed</span>
+        </div>
+
+        <button (click)="taskService.completeTask(task.id)">
+          Mark as Pending
+        </button>
+
+      </div>
+
+    } @empty {
+
+      <div class="empty-state">
+        <h2>No Completed Tasks Yet!</h2>
+        <p>Complete a task to see it here.</p>
+      </div>
+
+    }
+
+  </div>
+</div>

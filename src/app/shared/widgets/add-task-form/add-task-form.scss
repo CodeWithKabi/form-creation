@@ -1,0 +1,60 @@
+
+.add-task-form {
+  max-width: 750px;
+  width: 100%;
+  padding: 30px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  h2 {
+    font-size: 24px;
+    color: #1e293b;
+    margin-bottom: 25px;
+  }
+
+  app-input {
+    display: block;
+    margin-bottom: 22px;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+    margin-bottom: 8px;
+  }
+
+  textarea,
+  select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #334155;
+    background-color: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 22px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+  }
+
+  textarea {
+    min-height: 110px;
+    resize: vertical;
+    font-family: inherit;
+  }
+
+  app-button {
+    display: block;
+    margin-top: 8px;
+  }
+}
